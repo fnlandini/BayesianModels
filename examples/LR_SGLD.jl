@@ -105,7 +105,7 @@ function train_SGLD(X, z, n_classes, steps, lrate, n_samples)
                 deriv_comp_sig_for_all[:, d, :] = deriv_comp_sig(β, X̂[:,d])
             end
             # Update parameters
-            ϵ_t = step^(-0.5)
+            ϵ_t = (1+step)^(-0.55)
             η_t = sqrt(ϵ_t) * randn(size(β))
             derivatives_loglike = sum(onehot .* deriv_sig_for_all .+ N_up_to .* deriv_comp_sig_for_all, dims=2)[:,1,:]
             derivatives_prior = -β
